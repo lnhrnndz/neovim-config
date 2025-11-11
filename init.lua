@@ -190,7 +190,7 @@ require("lazy").setup({
   -- [[ Themes ]]
 
   --require('theme')
-  --'ayu-theme/ayu-vim',
+  'ayu-theme/ayu-vim',
   {
     "Shatur/neovim-ayu",
     priority = 1000,
