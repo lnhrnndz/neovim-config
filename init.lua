@@ -16,8 +16,10 @@ vim.opt.scrolloff = 10
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-vim.opt.wrap = false
+vim.opt.wrap = true
+vim.opt.linebreak = true
 vim.opt.breakindent = true
+vim.opt.showbreak = "↪ "
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
@@ -33,6 +35,16 @@ vim.opt.inccommand = "split"
 
 -- [[ Autocommands ]]
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "tex",
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+    vim.opt_local.breakindent = true
+    vim.opt_local.showbreak = "↪ "
+  end,
+})
+
 -- save and load folds automatically
 vim.api.nvim_create_autocmd({"BufWinLeave"}, {pattern = "*.*", command = "mkview"})
 vim.api.nvim_create_autocmd({"BufWinEnter"}, {pattern = "*.*", command = "silent! loadview"})
@@ -47,9 +59,15 @@ vim.keymap.set("n", "<C-j>", "<C-w><C-j>")
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>")
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>")
 
+-- FIX: doesn't work
+-- TODO: nice plugin similar to vscode behaviour?
+vim.keymap.set("n", "C-Tab", "C-6")
+
 vim.keymap.set("n", "<leader>b", ":Neotree toggle show buffers right<cr>")
 
 vim.keymap.set("n", "<leader>gs", ":Neogit<cr>")
+
+vim.keymap.set("n", "<leader>tq", ":TodoQuickFix<cr>")
 
 -- copy to clipboard
 vim.keymap.set("v", "<leader>y", '"+y')
@@ -57,6 +75,8 @@ vim.keymap.set("n", "<leader>y", '"+yy')
 -- paste from clipboard
 vim.keymap.set("v", "<leader>p", '"+p')
 vim.keymap.set("n", "<leader>p", '"+p')
+-- copy whole file to clipboard
+vim.keymap.set("n", "<leader>Y", ":w !pbcopy<cr>")
 
 -- [[ Plugins ]]
 
@@ -177,15 +197,6 @@ require("lazy").setup({
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
-  {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    build = "cd app && npm install",
-    init = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
-    ft = { "markdown" },
-  },
 
   -- [[ Themes ]]
 
@@ -209,4 +220,5 @@ require("lazy").setup({
   "Yazeed1s/oh-lucy.nvim",
   "catppuccin/nvim",
   "olimorris/onedarkpro.nvim",
+  "justinmk/vim-sneak",
 })
