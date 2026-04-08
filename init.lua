@@ -35,16 +35,6 @@ vim.opt.inccommand = "split"
 
 -- [[ Autocommands ]]
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "tex",
-  callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.linebreak = true
-    vim.opt_local.breakindent = true
-    vim.opt_local.showbreak = "↪ "
-  end,
-})
-
 -- save and load folds automatically
 vim.api.nvim_create_autocmd({"BufWinLeave"}, {pattern = "*.*", command = "mkview"})
 vim.api.nvim_create_autocmd({"BufWinEnter"}, {pattern = "*.*", command = "silent! loadview"})
