@@ -1,11 +1,6 @@
 return {
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
-  init = function()
-    -- Work around a Neovim 0.12.x + nvim-treesitter markdown injection bug
-    -- that crashes on fenced code blocks in markdown buffers.
-    vim.treesitter.query.set('markdown', 'injections', '')
-  end,
   main = 'nvim-treesitter.configs', -- Sets main module to use for opts
   -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
   opts = {
