@@ -205,6 +205,10 @@ require("lazy").setup({
         }
       }
       vim.cmd.colorscheme 'ayu'
+      --vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#0b0e14', bg = '#ffb454', bold = true })
+      --vim.api.nvim_set_hl(0, 'IncSearch', { fg = '#0b0e14', bg = '#ffb454', bold = true })
+      vim.api.nvim_set_hl(0, 'CurSearch', { fg = '#0b0e14', bg = '#EFB467' })
+      vim.api.nvim_set_hl(0, 'IncSearch', { fg = '#0b0e14', bg = '#EFB467' })
     end
   },
   "rebelot/kanagawa.nvim",
