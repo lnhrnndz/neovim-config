@@ -68,6 +68,8 @@ vim.keymap.set("n", "<leader>p", '"+p')
 -- copy whole file to clipboard
 vim.keymap.set("n", "<leader>Y", ":w !pbcopy<cr>")
 
+vim.keymap.set("n", "<leader>m", ":!make '%'<cr>")
+
 -- [[ Plugins ]]
 
 -- [[ Install `lazy.nvim` plugin manager ]]
